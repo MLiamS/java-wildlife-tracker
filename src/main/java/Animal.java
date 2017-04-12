@@ -6,7 +6,7 @@ public class Animal extends Matter {
   // public String name;
   // public int id;
 
-  public Animal(String name) {
+  public Animal(String name, int id) {
     this.name = name;
     this.id = id;
   }
