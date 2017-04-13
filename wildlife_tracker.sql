@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -163,15 +163,6 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 --
 
 COPY animals (id, name, endangered) FROM stdin;
-1	Red Bee	t
-2	Yellow Moose	t
-3	Plain old Horse	f
-4	Flying Fox	f
-5	Blue Turtle	t
-6	Frog	f
-7	Red Frog	t
-8	Cat	f
-9	Pink Cat	t
 \.
 
 
@@ -179,7 +170,7 @@ COPY animals (id, name, endangered) FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 9, true);
+SELECT pg_catalog.setval('animals_id_seq', 1, false);
 
 
 --
@@ -187,8 +178,6 @@ SELECT pg_catalog.setval('animals_id_seq', 9, true);
 --
 
 COPY rangers (id, name) FROM stdin;
-1	Sam
-2	Max
 \.
 
 
@@ -196,7 +185,7 @@ COPY rangers (id, name) FROM stdin;
 -- Name: rangers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('rangers_id_seq', 2, true);
+SELECT pg_catalog.setval('rangers_id_seq', 1, false);
 
 
 --
@@ -204,21 +193,6 @@ SELECT pg_catalog.setval('rangers_id_seq', 2, true);
 --
 
 COPY sightings (id, animal_id, location, ranger_name, "timestamp") FROM stdin;
-1	1	The Mall	Sam	10:05 AM Thursday April 2017
-2	1	The Mall	Sam	10:06 AM Thursday April 2017
-3	1	The Barn	Sam	10:06 AM Thursday April 2017
-4	1	The Friar	Sam	10:09 AM Thursday April 2017
-5	2	The Mall	Sam	10:10 AM Thursday April 2017
-6	3	The Barn	Sam	11:37 AM Thursday April 2017
-7	3	The Mall	Sam	11:48 AM Thursday April 2017
-8	4	The Pool	Sam	11:50 AM Thursday April 2017
-9	5	The Friar	Sam	11:50 AM Thursday April 2017
-10	6	The Mall	Sam	11:53 AM Thursday April 2017
-11	7	The Bog	Sam	11:53 AM Thursday April 2017
-12	8	By the water bown	Sam	01:25 PM Thursday April 2017
-13	9	By the water bown	Sam	01:26 PM Thursday April 2017
-14	1		Sam	01:26 PM Thursday April 2017
-15	4	The Friar	Max	02:14 PM Thursday April 2017
 \.
 
 
@@ -226,7 +200,7 @@ COPY sightings (id, animal_id, location, ranger_name, "timestamp") FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 15, true);
+SELECT pg_catalog.setval('sightings_id_seq', 1, false);
 
 
 --
@@ -256,3 +230,4 @@ ALTER TABLE ONLY sightings
 --
 -- PostgreSQL database dump complete
 --
+
