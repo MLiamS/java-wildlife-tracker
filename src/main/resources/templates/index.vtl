@@ -20,7 +20,7 @@
       <label>Select Ranger</label>
       <select name="rangerSelected">
         #foreach($r in $rangers)
-          <option value="$animal.getId()">$r.getName()</option>
+          <option value="$r.getName()">$r.getName()</option>
       #end
       </select>
   #end
@@ -44,9 +44,9 @@
     <input type="text" name="latLong">
     #if($rangers.size() >= 0)
       <label>Select Ranger</label>
-      <select name="animalSelected">
+      <select name="rangerSelected">
         #foreach($r in $rangers)
-          <option value="$animal.getId()">$r.getName()</option>
+          <option value="$r.getName()">$r.getName()</option>
         #end
       </select>
       #end
@@ -64,6 +64,7 @@
     <a href="/endangered_animal/$endangeredAnimal.getId()" class="thumbnail">
       <h4>$endangeredAnimal.getName()</h4>
       <h4>$endangeredAnimal.getSightings().size() Reported Sighting(s)</h4>
+      <h4>($endangeredAnimal.getSightings().get(0)).getTimeStamp()</h4>
       <p>Click for details</p>
     </a>
   #end

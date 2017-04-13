@@ -23,14 +23,14 @@ public class EndangeredAnimal extends Matter{
   public String getAge() {
     return age;
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getId() {
-    return id;
-  }
+  //
+  // public String getName() {
+  //   return name;
+  // }
+  //
+  // public int getId() {
+  //   return id;
+  // }
 
   @Override
   public boolean equals(Object otherEndangeredAnimal) {

@@ -2,16 +2,16 @@ import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.sql.Timestamp;
+// import java.sql.Timestamp;
 
 public class Sighting {
   private int animal_id;
   private String location;
   private String ranger_name;
   private int id;
-  private Timestamp timestamp;
+  private String timestamp;
 
-  public Sighting(int animal_id, String location, String ranger_name, Timestamp timestamp) {
+  public Sighting(int animal_id, String location, String ranger_name, String timestamp) {
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_name = ranger_name;
@@ -35,6 +35,9 @@ public class Sighting {
     return ranger_name;
   }
 
+  public String getTimeStamp() {
+    return this.timestamp;
+  }
   @Override
   public boolean equals(Object otherSighting) {
     if(!(otherSighting instanceof Sighting)) {

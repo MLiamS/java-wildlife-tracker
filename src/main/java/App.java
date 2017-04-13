@@ -7,13 +7,12 @@ import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.sql.Timestamp;
 import java.util.Date;
-// import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 
 public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
-    // DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -27,10 +26,10 @@ public class App {
 
     post("/endangered_sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      String rangerName = request.queryParams("rangerName");
+      String rangerName = request.queryParams("rangerSelected");
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
       Date date = new Date();
-      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      String timestamp  = new SimpleDateFormat("hh:mm a EEEEE MMMMM yyyy").format(new Date());
       String latLong = request.queryParams("latLong");
       Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, timestamp);
       sighting.save();
@@ -44,11 +43,10 @@ public class App {
 
     post("/sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      String rangerName = request.queryParams("rangerName");
+      String rangerName = request.queryParams("rangerSelected");
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
+      String timestamp  = new SimpleDateFormat("hh:mm a EEEEE MMMMM yyyy").format(new Date());
       String latLong = request.queryParams("latLong");
-      Date date = new Date();
-      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
       Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, timestamp);
       sighting.save();
       model.put("sighting", sighting);
@@ -93,6 +91,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Animal animal = Animal.find(Integer.parseInt(request.params("id")));
       model.put("animal", animal);
+      model.put("sightings", Sighting.all());
+      model.put("rangers", Ranger.all());
       model.put("template", "templates/animal.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -101,6 +101,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       EndangeredAnimal endangeredAnimal = EndangeredAnimal.find(Integer.parseInt(request.params("id")));
       model.put("endangeredAnimal", endangeredAnimal);
+      model.put("sightings", Sighting.all());
+      model.put("rangers", Ranger.all());
       model.put("template", "templates/endangered_animal.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

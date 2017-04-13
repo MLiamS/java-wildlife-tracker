@@ -12,11 +12,13 @@ public abstract class Matter {
   public String health;
   public String age;
 
-//getters
 
+  public String getName() {
+    return name;
+  }
 
-  public boolean getDanger() {
-    return endangered;
+  public int getId() {
+    return id;
   }
 
 }
