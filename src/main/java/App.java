@@ -70,15 +70,13 @@ public class App {
       boolean endangered = request.queryParamsValues("endangered")!=null;
       if (endangered) {
         String name = request.queryParams("name");
-        String health = request.queryParams("health");
-        String age = request.queryParams("age");
-        EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
+        EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, true);
         endangeredAnimal.save();
         model.put("animals", Animal.all());
         model.put("endangeredAnimals", EndangeredAnimal.all());
       } else {
         String name = request.queryParams("name");
-        Animal animal = new Animal(name);
+        Animal animal = new Animal(name, false);
         animal.save();
         model.put("animals", Animal.all());
         model.put("endangeredAnimals", EndangeredAnimal.all());

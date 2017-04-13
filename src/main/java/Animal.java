@@ -32,8 +32,9 @@ public class Animal extends Matter {
 
   public static List<Animal> all() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals;";
+      String sql = "SELECT * FROM animals WHERE endangered=:endangered;";
       return con.createQuery(sql)
+        .addParameter("endangered", false)
         .executeAndFetch(Animal.class);
     }
   }
