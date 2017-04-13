@@ -15,7 +15,7 @@
     </select>
 
     <label>Location</label>
-    <input type="text" name="latLong">
+    <input type="text" name="latLong" required>
     #if($rangers.size() >= 0)
       <label>Select Ranger</label>
       <select name="rangerSelected">
@@ -41,7 +41,7 @@
     </select>
 
     <label>Location</label>
-    <input type="text" name="latLong">
+    <input type="text" name="latLong" required="">
     #if($rangers.size() >= 0)
       <label>Select Ranger</label>
       <select name="rangerSelected">
@@ -64,8 +64,8 @@
     <a href="/endangered_animal/$endangeredAnimal.getId()" class="thumbnail">
       <h4>$endangeredAnimal.getName()</h4>
       <h4>$endangeredAnimal.getSightings().size() Reported Sighting(s)</h4>
-      <h4>#if ($endangeredAnimals.getSightings() == 0)
-        ($endangeredAnimal.getSightings().get(0)).getTimeStamp()
+      <h4>#if ($endangeredAnimal.getSightings().size() > 0)
+        First Seen @ $endangeredAnimal.getSightings().get(0).getTimeStamp()
           #end
       </h4>
       <p>Click for details</p>
@@ -81,6 +81,10 @@
     <a href="/animal/$animal.getId()" class="thumbnail">
       <h4>$animal.getName()</h4>
       <h4>$animal.getSightings().size() Reported Sighting(s)</h4>
+      <h4>#if ($animal.getSightings().size() > 0)
+        First Seen @ $animal.getSightings().get(0).getTimeStamp()
+          #end
+      </h4>
       <p>Click for details</p>
     </a>
   #end

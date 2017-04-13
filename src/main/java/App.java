@@ -28,7 +28,6 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerSelected");
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
-      Date date = new Date();
       String timestamp  = new SimpleDateFormat("hh:mm a EEEEE MMMMM yyyy").format(new Date());
       String latLong = request.queryParams("latLong");
       Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, timestamp);
