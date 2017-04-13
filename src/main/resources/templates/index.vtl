@@ -16,9 +16,15 @@
 
     <label>Location</label>
     <input type="text" name="latLong">
-    <label>Your Name</label>
-    <input type="text" name="rangerName">
-    <button type="submit">Submit Report</button>
+    #if($rangers.size() >= 0)
+      <label>Select Ranger</label>
+      <select name="rangerSelected">
+        #foreach($r in $rangers)
+          <option value="$animal.getId()">$r.getName()</option>
+      #end
+      </select>
+  #end
+  <button type="submit">Submit Report</button>
   #end
 </form>
 
@@ -36,10 +42,16 @@
 
     <label>Location</label>
     <input type="text" name="latLong">
-    <label>Your Name</label>
-    <input type="text" name="rangerName">
-    <button type="submit">Submit Report</button>
-  #end
+    #if($rangers.size() >= 0)
+      <label>Select Ranger</label>
+      <select name="animalSelected">
+        #foreach($r in $rangers)
+          <option value="$animal.getId()">$r.getName()</option>
+        #end
+      </select>
+      #end
+      <button type="submit">Submit Report</button>
+    #end
 </form>
 
 

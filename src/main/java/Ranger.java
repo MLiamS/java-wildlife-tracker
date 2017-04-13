@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Ranger extends Matter {
 
-  public Ranger(String name, int id) {
+  public Ranger(String name) {
     this.name = name;
-    this.id = id;
+    // this.id = id;
   }
 
   public String getName() {
@@ -34,6 +34,24 @@ public class Ranger extends Matter {
         .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public static List<Ranger> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM rangers;";
+      return con.createQuery(sql)
+        .executeAndFetch(Ranger.class);
+    }
+  }
+
+  public static Ranger find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM rangers WHERE id=:id;";
+      Ranger ranger = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Ranger.class);
+      return ranger;
     }
   }
 }

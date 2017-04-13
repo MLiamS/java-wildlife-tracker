@@ -16,6 +16,7 @@ public class App {
       model.put("animals", Animal.all());
       model.put("endangeredAnimals", EndangeredAnimal.all());
       model.put("sightings", Sighting.all());
+      model.put("rangers", Ranger.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -96,10 +97,29 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/error", (request, response) -> {
+    // get("/error", (request, response) -> {
+    //   Map<String, Object> model = new HashMap<String, Object>();
+    //   model.put("template", "templates/error.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
+
+    get("/ranger/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/error.vtl");
+      model.put("template", "templates/ranger-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/ranger/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+        String name = request.queryParams("name");
+        Ranger ranger = new Ranger(name);
+        ranger.save();
+        model.put("rangers",Ranger.all());
+        model.put("animals", Animal.all());
+        model.put("endangeredAnimals", EndangeredAnimal.all());
+        response.redirect("/");        
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
   }
 }
