@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Animal extends Matter {
+  public static final boolean NOT_ENDANGERED = false;
 
-  public Animal(String name) {
+  public Animal(String name, boolean endangered) {
     this.name = name;
+    endangered = NOT_ENDANGERED;
   }
 
   @Override
@@ -20,7 +22,7 @@ public class Animal extends Matter {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name) VALUES (:name);";
+      String sql = "INSERT INTO animals (name, endangered) VALUES (:name, false);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .executeUpdate()
@@ -43,25 +45,6 @@ public class Animal extends Matter {
         .addParameter("id", id)
         .executeAndFetchFirst(Animal.class);
       return animal;
-    }
-  }
-
-  public void updateName(String name) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE animals SET name=:name WHERE id=:id;";
-      con.createQuery(sql)
-        .addParameter("id", id)
-        .addParameter("name", name)
-        .executeUpdate();
-    }
-  }
-
-  public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM animals WHERE id=:id;";
-      con.createQuery(sql)
-        .addParameter("id", id)
-        .executeUpdate();
     }
   }
 

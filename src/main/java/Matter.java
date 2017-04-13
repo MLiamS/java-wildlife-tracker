@@ -9,8 +9,6 @@ public abstract class Matter {
   public boolean endangered;
   public int id;
   public String name;
-  public String health;
-  public String age;
 
 
   public String getName() {
@@ -19,6 +17,10 @@ public abstract class Matter {
 
   public int getId() {
     return id;
+  }
+
+  public boolean getEndangered() {
+    return endangered;
   }
 
 }
