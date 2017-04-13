@@ -3,11 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndangeredAnimal extends Matter{
-  // public String name;
-  // public int id;
-  // public boolean endangered;
-  // private String health;
-  // private String age;
+
 
   public EndangeredAnimal(String name, String health, String age) {
     this.name = name;
@@ -23,14 +19,6 @@ public class EndangeredAnimal extends Matter{
   public String getAge() {
     return age;
   }
-  //
-  // public String getName() {
-  //   return name;
-  // }
-  //
-  // public int getId() {
-  //   return id;
-  // }
 
   @Override
   public boolean equals(Object otherEndangeredAnimal) {

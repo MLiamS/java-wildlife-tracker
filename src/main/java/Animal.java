@@ -3,21 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Animal extends Matter {
-  public String name;
-  public int id;
 
   public Animal(String name) {
     this.name = name;
-    this.id = id;
   }
-
-  // public String getName() {
-  //   return name;
-  // }
-  //
-  // public int getId() {
-  //   return id;
-  // }
 
   @Override
   public boolean equals(Object otherAnimal) {
