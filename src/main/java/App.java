@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+import java.sql.Timestamp;
+import java.util.Date;
+// import java.text.SimpleDateFormat;
 
 public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
+    // DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -25,8 +29,10 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
+      Date date = new Date();
+      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, timestamp);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", EndangeredAnimal.all());
@@ -41,7 +47,9 @@ public class App {
       String rangerName = request.queryParams("rangerName");
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Date date = new Date();
+      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, timestamp);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", Animal.all());
@@ -117,7 +125,7 @@ public class App {
         model.put("rangers",Ranger.all());
         model.put("animals", Animal.all());
         model.put("endangeredAnimals", EndangeredAnimal.all());
-        response.redirect("/");        
+        response.redirect("/");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
